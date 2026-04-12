@@ -3,7 +3,7 @@ import { Outfit } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/common/header";
 import Footer from "@/components/common/footer";
-
+import { ClerkProvider } from "@clerk/nextjs";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -20,15 +20,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${outfit.className} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col">
-        <Header/>
-        {children}
-        <Footer/>
+    <ClerkProvider>
+      <html
+        lang="en"
+        className={`${outfit.className} h-full antialiased`}
+      >
+        <body className="min-h-full flex flex-col">
+          <Header />
+          {children}
+          <Footer />
         </body>
-    </html>
+      </html>
+    </ClerkProvider>
   );
 }

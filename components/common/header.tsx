@@ -1,7 +1,10 @@
+"use client"
+
 import { CompassIcon, HomeIcon, SparkleIcon, SparklesIcon, UserIcon } from "lucide-react"
 import Link from "next/link"
 import { Button } from "../ui/button"
-
+import { SignInButton, SignUpButton, UserButton } from "@clerk/nextjs"
+import { useUser } from "@clerk/nextjs"
 
 const Logo = () => {
     return <Link href="/" className="flex items-center gap-2 group">
@@ -11,7 +14,7 @@ const Logo = () => {
 }
 
 const Header = () => {
-    const isSigned = true;
+    const { isSignedIn } = useUser()
     return (
         <div className="sticky top-0 z-50 border-b bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/62">
             <div className="wrapper px-12">
@@ -30,20 +33,31 @@ const Header = () => {
                     </nav>
 
                     <div className="flex items-center gap-3">
-                        {isSigned ? (
+                        {!isSignedIn && (
                             <>
-                                <Button >
+                                <SignInButton>
+                                    <button>
+                                        Sign In
+                                    </button>
+                                </SignInButton>
+                                <SignUpButton>
+                                    <Button >
+                                        Sign Up
+                                    </Button>
+                                </SignUpButton>
+                            </>
+                        )}
+
+                        {isSignedIn && (
+                            <>
+                                <Button>
                                     <Link href="/submit" className="flex items-center gap-1">
                                         <SparklesIcon className="size-4" />
                                         Submit project
                                     </Link>
                                 </Button>
-                                <Button variant="ghost"><UserIcon className="size-4" /></Button>
-                            </>
-                        ) : (
-                            <>
-                                <Button variant="ghost">Sign In</Button>
-                                <Button>Sign Up</Button>
+
+                                <UserButton />
                             </>
                         )}
                     </div>
