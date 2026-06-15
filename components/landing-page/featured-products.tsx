@@ -41,7 +41,7 @@ const FeaturedProducts = () => {
         </div>
         <div className='grid-wrapper'>
           {Products.map((product) =>
-            <ProductCard key={product.id} product={product} />)}
+            <ProductCard key={product.id} productId={product.id} product={product} />)}
         </div>
       </div>
     </section>
