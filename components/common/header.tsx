@@ -1,6 +1,6 @@
 "use client"
 
-import { CompassIcon, HomeIcon, SparkleIcon, SparklesIcon, UserIcon } from "lucide-react"
+import { CompassIcon, HomeIcon, SparkleIcon, SparklesIcon } from "lucide-react"
 import Link from "next/link"
 import { Button } from "../ui/button"
 import { SignInButton, SignUpButton, UserButton } from "@clerk/nextjs"
