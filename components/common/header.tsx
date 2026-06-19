@@ -1,10 +1,11 @@
 "use client"
 
-import { CompassIcon, HomeIcon, SparkleIcon, SparklesIcon } from "lucide-react"
+import { CompassIcon, HomeIcon, LoaderIcon, SparkleIcon, SparklesIcon } from "lucide-react"
 import Link from "next/link"
 import { Button } from "../ui/button"
 import { SignInButton, SignUpButton, UserButton } from "@clerk/nextjs"
 import { useUser } from "@clerk/nextjs"
+import { Suspense } from "react"
 
 const Logo = () => {
     return <Link href="/" className="flex items-center gap-2 group">
@@ -33,6 +34,7 @@ const Header = () => {
                     </nav>
 
                     <div className="flex items-center gap-3">
+                        <Suspense fallback={<div><LoaderIcon className="size-4 animate-spin"/></div>}>
                         {!isSignedIn && (
                             <>
                                 <SignInButton>
@@ -60,6 +62,7 @@ const Header = () => {
                                 <UserButton />
                             </>
                         )}
+                        </Suspense>
                     </div>
 
                 </div>
