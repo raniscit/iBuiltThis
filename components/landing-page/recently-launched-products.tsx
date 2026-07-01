@@ -1,6 +1,6 @@
 import SectionHeader from '../common/section-header'
 import { CalendarIcon, PlaneIcon } from 'lucide-react'
-import ProductCard from '../projects/product-card'
+import ProductCard from '../products/product-card'
 import EmptyState from '../common/empty-state'
 import { getRecentlyLaunchedProducts } from '@/lib/products/product-select'
 
