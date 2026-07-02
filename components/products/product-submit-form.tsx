@@ -7,7 +7,7 @@ import { addProductAction } from '@/lib/products/product-actions'
 import { useActionState } from 'react'
 
 
-const initialState = {
+const initialState: FormState = {
   success: false,
   errors: {},
   message: "",

@@ -14,7 +14,7 @@ type FormState = {
 };
 
 
-export const addProductAction = async (prevState: FormState, formData: FormData) => {
+export const addProductAction = async (prevState: FormState, formData: FormData):Promise<FormState> => {
     try {
 
         const { userId } = await auth();
@@ -22,6 +22,7 @@ export const addProductAction = async (prevState: FormState, formData: FormData)
         if (!userId) {
             return {
                 success: false,
+                errors:{},
                 message: "You must be signed in to submit the product"
             };
         }
@@ -79,6 +80,7 @@ export const addProductAction = async (prevState: FormState, formData: FormData)
 console.log("PRODUCT INSERTED SUCCESSFULLY");
         return {
             success: true,
+            errors:{},
             message: "Product submitted successfully! It will be reviewed shortly.",
         };
 
