@@ -6,6 +6,7 @@ import { db } from "@/db";
 import { products } from "@/db/schema";
 import z from "zod";
 import { eq } from "drizzle-orm";
+import { revalidatePath } from "next/cache";
 
 type FormState = {
     success: boolean;
@@ -86,6 +87,7 @@ export const addProductAction = async (prevState: FormState, formData: FormData)
             organizationId: orgId,
             userId
         });
+        revalidatePath("/");  //for fresh data after inserting data in db
 console.log("PRODUCT INSERTED SUCCESSFULLY");
         return {
             success: true,

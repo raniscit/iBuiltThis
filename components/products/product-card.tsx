@@ -20,7 +20,7 @@ const ProductCard = ({ productId, product }:
     return (
         <div>
             <Link href={`/products/${productId}`}>
-                <Card className='group card-hover hover:bg-primary-foreground/10 border-solid border-gray-400 min-h-[180px]'>
+                <Card className='group card-hover hover:bg-primary-foreground/10 border-solid border-gray-400 min-h-[200px]'>
                     <CardHeader className='flex-1'>
                         <div className='flex items-start gap-4'>
                             <div className='flex-1 min-w-0'>
