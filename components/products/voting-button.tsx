@@ -6,7 +6,7 @@ import { Button } from '../ui/button';
 import { downvoteProductAction, upvoteProductAction } from '@/lib/products/product-actions';
 import { useOptimistic, useTransition } from 'react';
 
-const VotingButton = ({ hasVoted, voteCount: initialVoteCount, productId }: { hasVoted: boolean; voteCount: number; productId: number }) => {
+const VotingButton = ({ hasVoted, voteCount: initialVoteCount, productId }: { hasVoted?: boolean; voteCount: number; productId: number }) => {
   const [optimisticVoteCount, setOptimisticVoteCount] = useOptimistic(initialVoteCount, (currentCount, change: number) => Math.max(0, currentCount + change));
 
   const [isPending, startTransition] = useTransition();

@@ -118,7 +118,7 @@ export const upvoteProductAction = async (productId: number) => {
     try {
         const { userId, orgId } = await auth();
 
-        if (!userId) {            
+        if (!userId) {
             return {
                 success: false,
                 errors: {},
@@ -135,13 +135,25 @@ export const upvoteProductAction = async (productId: number) => {
         }
 
         await db
-        .update(products)
-        .set({
-            voteCount: sql`GREATEST(0,vote_count + 1)`,
-        })
-        .where(eq(products.id, productId));
+            .update(products)
+            .set({
+                voteCount: sql`GREATEST(0,vote_count + 1)`,
+            })
+            .where(eq(products.id, productId));
+
+        // Fetch slug
+        const product = await db.query.products.findFirst({
+            where: eq(products.id, productId),
+            columns: {
+                slug: true,
+            },
+        });
 
         revalidatePath("/");
+
+        if (product) {
+            revalidatePath(`/products/${product.slug}`);
+        }
 
         return {
             success: true,
@@ -162,7 +174,7 @@ export const downvoteProductAction = async (productId: number) => {
     try {
         const { userId, orgId } = await auth();
 
-        if (!userId) {            
+        if (!userId) {
             return {
                 success: false,
                 errors: {},
@@ -179,13 +191,25 @@ export const downvoteProductAction = async (productId: number) => {
         }
 
         await db
-        .update(products)
-        .set({
-            voteCount: sql`GREATEST(0,vote_count - 1)`,
-        })
-        .where(eq(products.id, productId));
+            .update(products)
+            .set({
+                voteCount: sql`GREATEST(0,vote_count - 1)`,
+            })
+            .where(eq(products.id, productId));
+
+        // Fetch slug
+        const product = await db.query.products.findFirst({
+            where: eq(products.id, productId),
+            columns: {
+                slug: true,
+            },
+        });
 
         revalidatePath("/");
+
+        if (product) {
+            revalidatePath(`/products/${product.slug}`);
+        }
 
         return {
             success: true,
