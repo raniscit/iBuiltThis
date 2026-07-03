@@ -1,9 +1,9 @@
 "use client"
 
-import { CompassIcon, HomeIcon, LoaderIcon, SparkleIcon, SparklesIcon } from "lucide-react"
+import { BuildingIcon, CompassIcon, HomeIcon, LoaderIcon, SparkleIcon, SparklesIcon } from "lucide-react"
 import Link from "next/link"
 import { Button } from "../ui/button"
-import { SignInButton, SignUpButton, UserButton } from "@clerk/nextjs"
+import { OrganizationSwitcher, SignInButton, SignUpButton, UserButton } from "@clerk/nextjs"
 import { useUser } from "@clerk/nextjs"
 import { Suspense } from "react"
 
@@ -34,34 +34,52 @@ const Header = () => {
                     </nav>
 
                     <div className="flex items-center gap-3">
-                        <Suspense fallback={<div><LoaderIcon className="size-4 animate-spin"/></div>}>
-                        {!isSignedIn && (
-                            <>
-                                <SignInButton>
-                                    <button>
-                                        Sign In
-                                    </button>
-                                </SignInButton>
-                                <SignUpButton>
-                                    <Button >
-                                        Sign Up
+                        <Suspense fallback={<div><LoaderIcon className="size-4 animate-spin" /></div>}>
+                            {!isSignedIn && (
+                                <>
+                                    <SignInButton>
+                                        <button>
+                                            Sign In
+                                        </button>
+                                    </SignInButton>
+                                    <SignUpButton>
+                                        <Button >
+                                            Sign Up
+                                        </Button>
+                                    </SignUpButton>
+                                </>
+                            )}
+
+                            {isSignedIn && (
+                                <>
+                                    <Button>
+                                        <Link href="/submit" className="flex items-center gap-1">
+                                            <SparklesIcon className="size-4" />
+                                            Submit project
+                                        </Link>
                                     </Button>
-                                </SignUpButton>
-                            </>
-                        )}
 
-                        {isSignedIn && (
-                            <>
-                                <Button>
-                                    <Link href="/submit" className="flex items-center gap-1">
-                                        <SparklesIcon className="size-4" />
-                                        Submit project
-                                    </Link>
-                                </Button>
-
-                                <UserButton />
-                            </>
-                        )}
+                                    <UserButton >
+                                        <UserButton.UserProfilePage label="Organization"
+                                            labelIcon={<BuildingIcon className="size-4" />}
+                                            url="/organizations">
+                                            <div className="p-4">
+                                                <h2>Manage Organization</h2>
+                                                <OrganizationSwitcher
+                                                    hidePersonal={true}
+                                                    afterCreateOrganizationUrl={"/submit"}
+                                                    afterSelectOrganizationUrl={"/submit"}
+                                                    appearance={{
+                                                        elements: {
+                                                            rootBox: "w-full",
+                                                        },
+                                                    }}
+                                                />
+                                            </div>
+                                        </UserButton.UserProfilePage>
+                                    </UserButton>
+                                </>
+                            )}
                         </Suspense>
                     </div>
 

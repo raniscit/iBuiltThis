@@ -17,13 +17,21 @@ type FormState = {
 export const addProductAction = async (prevState: FormState, formData: FormData):Promise<FormState> => {
     try {
 
-        const { userId } = await auth();
+        const { userId,orgId } = await auth();
 
         if (!userId) {
             return {
                 success: false,
                 errors:{},
                 message: "You must be signed in to submit the product"
+            };
+        }
+
+        if (!orgId) {
+            return {
+                success: false,
+                errors:{},
+                message: "You must be a member of an organization to submit a product"
             };
         }
 
@@ -75,6 +83,7 @@ export const addProductAction = async (prevState: FormState, formData: FormData)
             tags: tagsArray,
             status: "pending",
             submittedBy: userEmail,
+            organizationId: orgId,
             userId
         });
 console.log("PRODUCT INSERTED SUCCESSFULLY");
