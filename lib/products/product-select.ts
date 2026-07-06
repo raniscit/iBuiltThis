@@ -3,7 +3,6 @@ import { products } from "@/db/schema";
 import { desc, eq } from "drizzle-orm";
 
 export async function getAllApprovedProducts() {
-    "use cache";
     const productsdata = await db
         .select()
         .from(products)
