@@ -2,12 +2,22 @@ import { db } from "@/db";
 import { products } from "@/db/schema";
 import { desc, eq } from "drizzle-orm";
 
-export async function getFeaturedProducts() {
+export async function getAllApprovedProducts() {
     "use cache";
     const productsdata = await db
         .select()
         .from(products)
         .where(eq(products.status, "approved"))
+        .orderBy(desc(products.voteCount));
+
+    return productsdata;
+}
+
+export async function getAllProducts() {
+    "use cache";
+    const productsdata = await db
+        .select()
+        .from(products)
         .orderBy(desc(products.voteCount));
 
     return productsdata;

@@ -3,13 +3,13 @@ import SectionHeader from "@/components/common/section-header";
 import VotingButton from "@/components/products/voting-button";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { getFeaturedProducts, getProductBySlug } from "@/lib/products/product-select";
+import { getAllApprovedProducts, getProductBySlug } from "@/lib/products/product-select";
 import { ArrowLeftIcon, CalendarIcon, ExternalLinkIcon, StarIcon, UserIcon } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
 export async function generateStaticParams() {
-    const products = await getFeaturedProducts();
+    const products = await getAllApprovedProducts();
 
     return products.map((product) => ({
         slug: product.slug.toString(),

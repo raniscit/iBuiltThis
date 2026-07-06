@@ -239,7 +239,7 @@
 
   /* Empty state styling - used when no data is available */
   .empty-state {
-    @apply border rounded-lg p-12 text-center;
+    @apply border rounded-lg p-16 text-center;
   }
 
   /* Status badge card - used in stats displays */

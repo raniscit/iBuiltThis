@@ -4,11 +4,11 @@ import SectionHeader from '@/components/common/section-header';
 import { Button } from '../ui/button';
 import Link from 'next/link';
 import ProductCard from '../products/product-card';
-import { getFeaturedProducts } from '@/lib/products/product-select';
+import { getAllApprovedProducts } from '@/lib/products/product-select';
 
 
 const FeaturedProducts = async() => {
-  const featuredProducts = await getFeaturedProducts();
+  const featuredProducts = await getAllApprovedProducts();
   return (
     <section className='py-20 bg-muted/20 '>
       <div className='wrapper '>

@@ -1,11 +1,11 @@
 import SectionHeader from '@/components/common/section-header'
 import ProductExplorerComponent from '@/components/products/product-explorer'
-import { getFeaturedProducts } from '@/lib/products/product-select';
+import { getAllApprovedProducts } from '@/lib/products/product-select';
 import { CompassIcon } from 'lucide-react'
 import { Suspense } from "react";
 
 const page = async() => {
-    const allProduct = await getFeaturedProducts();
+    const allProduct = await getAllApprovedProducts();
 
     return (
         <div className='py-20'>
